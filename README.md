@@ -1,6 +1,6 @@
-# knack-headless
+# knack-headless-demo
 
-> My astounding Nuxt.js project
+> Exploring the use of Nuxt & Vuetify as a front-end for a Knack application.
 
 ## Build Setup
 
