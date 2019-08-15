@@ -103,8 +103,8 @@
 </template>
 
 <script>
-  import KnackApiWrapperPublic from '../../knack-api-wrapper-public'
-  const knackApiWrapperPublic = new KnackApiWrapperPublic()
+  import KnackPublicApiWrapper from '../../knack-public-api-wrapper'
+  const knackPublicApiWrapper = new KnackPublicApiWrapper()
 
   export default {
     name: `MyCustomKnackPage`,
@@ -123,8 +123,8 @@
     },
     async asyncData () {
 
-      const { data: { records } } = await knackApiWrapperPublic.getRecords(`object_1`)
-      const { data: { fields } } = await knackApiWrapperPublic.getFields(`object_1`)
+      const { data: { records } } = await knackPublicApiWrapper.getRecords(`object_1`)
+      const { data: { fields } } = await knackPublicApiWrapper.getFields(`object_1`)
 
       const tableHeaders = fields.map(field => {
 
@@ -157,7 +157,7 @@
 
         this.loading = true
 
-        await knackApiWrapperPublic.updateRecord(recordId, this.objectKey, {
+        await knackPublicApiWrapper.updateRecord(recordId, this.objectKey, {
           [fieldKey]: fieldValue
         })
 
@@ -167,11 +167,11 @@
 
         this.loading = true
 
-        await knackApiWrapperPublic.deleteBatchRecordsById(this.selectedRecordIds, this.objectKey)
+        await knackPublicApiWrapper.deleteBatchRecordsById(this.selectedRecordIds, this.objectKey)
 
         setTimeout(async () => {
 
-          const { data: { records } } = await knackApiWrapperPublic.getRecords(this.objectKey)
+          const { data: { records } } = await knackPublicApiWrapper.getRecords(this.objectKey)
 
           this.records = records
         }, 1000)
@@ -189,7 +189,7 @@
 
         this.loading = true
 
-        const { data } = await knackApiWrapperPublic.createRecord(this.objectKey, this.newItem)
+        const { data } = await knackPublicApiWrapper.createRecord(this.objectKey, this.newItem)
 
         this.records.push(data)
 
